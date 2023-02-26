@@ -24,6 +24,15 @@ function NavBar() {
       <div style={{'textAlign': 'right'}}>
         <Button buttonType="action">Sign In</Button>
       </div>
+      <div>
+        <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
+          <Button buttonType="transparent">Home</Button>
+          <Button buttonType="transparent">Technology</Button>
+          <Button buttonType="transparent">Stories</Button>
+          <Button buttonType="transparent">Demo</Button>
+          <Button buttonType="transparent">Contact</Button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -36,19 +45,8 @@ const Header = ({ text }: { text: string }) =>
 function App() {
   return (
     <div className={styles.App}>
-    <NavBar/>
-      <div>
-        <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
-          <Button buttonType="transparent">Home</Button>
-          <Button buttonType="transparent">Technology</Button>
-          <Button buttonType="transparent">Stories</Button>
-          <Button buttonType="transparent">Demo</Button>
-          <Button buttonType="transparent">Contact</Button>
-        </div>
-      </div>
-      
+    <NavBar/> 
       <span style={{'fontSize': '25px'}}>Hello. <span style={{'color': '#0073b1'}}>Sign in</span><span style={{'fontWeight': '400'}}> for the best experience. New to Asda? </span><span style={{'color': '#0073b1'}}>Register</span></span>
-      
       <div style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#d5e7c7', 'justifyContent': 'space-between'}}>
         <div style={{'margin': '15px', 'textAlign': 'left'}}>
           <h3>We protect people, dogs and your fish and chips from the threat of seagulls,<br/>
