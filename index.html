@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
+    <div id="liveView" class="videoView">
+      <video id="video" controls loop style="display: none;">
+        <source src="videos/3.mp4" type="video/mp4">
+      </video>
+    </div>
+  </body>
+
+<!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+<!-- Load the coco-ssd model. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+
+<!-- Place your code in the script tag below. You can also use an external .js file -->
+<script src="script.js" type="text/javascript"></script>
+
+</html>
