@@ -1,0 +1,30 @@
+.main {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 15px;
+  margin-left: 10px;
+  text-align: left;
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.text {
+  display: flex;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.subtitle {
+  font-weight: 400;
+}
+
+.icon {
+  display: flex;
+  width: 32px;
+  height: 32px;
+
+  &::after {
+    display: flex;
+  }
+}
