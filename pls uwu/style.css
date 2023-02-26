@@ -37,3 +37,10 @@ canvas.overlay {
   transform-origin: top left;
   transform: scale(1);
 }
+
+img {
+ position:absolute;
+  transform:translate(-50%,-50%);
+  height:35px;
+  width:35px;
+}
