@@ -8,6 +8,7 @@ import { stories, Story } from './data/stories';
 
 function NavBar() {
   return (
+    <>
     <div style={{'display': 'flex','justifyContent': 'space-between', 'marginBottom': '16px'}}>
       <div style={{'display': 'flex'}}>
         <div style={{'height': '32px', 'width': '32px', 'marginTop': '2px'}}>
@@ -24,16 +25,17 @@ function NavBar() {
       <div style={{'textAlign': 'right'}}>
         <Button buttonType="action">Sign In</Button>
       </div>
-      <div>
-        <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
-          <Button buttonType="transparent">Home</Button>
-          <Button buttonType="transparent">Technology</Button>
-          <Button buttonType="transparent">Stories</Button>
-          <Button buttonType="transparent">Demo</Button>
-          <Button buttonType="transparent">Contact</Button>
-        </div>
+    </div>
+    <div>
+      <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
+        <Button buttonType="transparent">Home</Button>
+        <Button buttonType="transparent">Technology</Button>
+        <Button buttonType="transparent">Stories</Button>
+        <Button buttonType="transparent">Demo</Button>
+        <Button buttonType="transparent">Contact</Button>
       </div>
     </div>
+    </>
   );
 }
 
