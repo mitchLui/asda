@@ -172,15 +172,14 @@ cocoSsd.load().then(loadedModel => {
   displayedCanvasCtx.drawImage(video, 0, 0);
 
   // Start the video
+  document.addEventListener('mousemove', function(e) {
+    let circle = document.getElementById("crosshair");
+    let left = e.offsetX;
+    let top = e.offsetY;
+    circle.style.left = e.pageX + 'px';
+    circle.style.top = e.pageY + 'px';
+  });
+  
   video.play();
   predict();
-});
-
-document.addEventListener('mousemove', function(e) {
-  let box = document.querySelectorAll('input[type=img]');
-  let circle = box[0];
-  let left = e.offsetX;
-  let top = e.offsetY;
-  circle.style.left = left + 'px';
-  circle.style.top = top + 'px';
 });

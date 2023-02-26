@@ -41,6 +41,9 @@ canvas.overlay {
 img {
  position:absolute;
   transform:translate(-50%,-50%);
-  height:35px;
-  width:35px;
+  height:80px;
+  width:80px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
