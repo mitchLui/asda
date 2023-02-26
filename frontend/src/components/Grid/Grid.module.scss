@@ -1,0 +1,12 @@
+.main{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.33fr));
+  grid-gap: 1rem;
+  padding: 0.5rem 0.5rem;
+}
+
+@media screen and (min-width: 100px) {
+  .main{
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}

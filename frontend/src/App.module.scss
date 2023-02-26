@@ -1,0 +1,19 @@
+.App {
+  text-align: left;
+  padding: 16px 32px;
+}
+
+.test {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    padding: 16px 16px;
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
