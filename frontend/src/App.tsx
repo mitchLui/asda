@@ -1,4 +1,4 @@
-import './App.scss';
+import styles from './App.module.scss';
 import Button from './components/Button/Button';
 import Card from './components/Card/Card';
 import Grid from './components/Grid/Grid';
@@ -18,7 +18,7 @@ function NavBar() {
         </div>
         <div style={{'textAlign': 'left'}}>
           <span style={{'fontSize': '30px', 'color': '#538316', fontWeight: '900'}}>ASDA</span>
-          <span style={{'paddingLeft': '10px'}}>Anti-Seagull Defence Apparatus</span><br/>
+          <span className={styles.mobile} style={{'paddingLeft': '10px'}}>Anti-Seagull Defence Apparatus</span><br/>
         </div>
       </div>
       <div style={{'textAlign': 'right'}}>
@@ -35,7 +35,7 @@ const Header = ({ text }: { text: string }) =>
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
     <NavBar/>
       <div>
         <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
@@ -49,10 +49,10 @@ function App() {
       
       <span style={{'fontSize': '25px'}}>Hello. <span style={{'color': '#0073b1'}}>Sign in</span><span style={{'fontWeight': '400'}}> for the best experience. New to Asda? </span><span style={{'color': '#0073b1'}}>Register</span></span>
       
-      <div className="intro" style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#d5e7c7', 'justifyContent': 'space-between'}}>
+      <div style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#d5e7c7', 'justifyContent': 'space-between'}}>
         <div style={{'margin': '15px', 'textAlign': 'left'}}>
           <h3>We protect people, dogs and your fish and chips from the threat of seagulls,<br/>
-          and we do it with the best technology available.<br/>
+          and we do it with the best technology available to create our utopia.<br/>
           <span style={{'fontWeight': '800'}}>We are <span style={{'color': '#538316'}}>ASDA</span>.</span></h3>
           <div style={{'marginTop': '10px'}}>
             <Button>How it works</Button>
