@@ -1,7 +1,3 @@
-video {
-  display: block;
-}
-
 .highlighter {
   background: rgba(0, 255, 0, 0.25);
   border: 1px dashed #fff;
@@ -15,9 +11,10 @@ video {
   width: 48%;
   margin: 2% 1%;
   cursor: pointer;
+  z-index: 0;
 }
 
-.videoView p, .classifyOnClick p {
+/* .videoView p, .classifyOnClick p {
   position: absolute;
   padding: 5px;
   background-color: rgba(255, 111, 0, 0.85);
@@ -26,4 +23,17 @@ video {
   z-index: 2;
   font-size: 12px;
   margin: 0;
+} */
+
+canvas.overlay {
+  opacity: 1;
+  
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+#liveView {
+  transform-origin: top left;
+  transform: scale(1);
 }
