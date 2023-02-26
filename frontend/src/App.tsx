@@ -1,12 +1,33 @@
+import { useState } from 'react';
 import styles from './App.module.scss';
-import Button from './components/Button/Button';
+import Button, { AnchorButton } from './components/Button/Button';
 import Card from './components/Card/Card';
 import Grid from './components/Grid/Grid';
 import PostcodeChecker from './components/PostcodeChecker/PostcodeChecker';
 import { PulsaingCircle } from './components/PulsatingCircle/PulsatingCircle';
 import { stories, Story } from './data/stories';
 
-function NavBar() {
+function About({onClose = () => {}}) {
+  return (
+    <div className={styles.about}>    
+      <div className={styles.aboutcontent}>
+          <Header text={"About the project"} />
+          <div>
+            <p>
+              Hopefully you'll have realised by now that this is a parody of ASDA (the supermarket chain)'s website. It just so happens
+              that our thing was called the Anti Seagull Defence Apparatus (ASDA) and we thought it would be funny to make a website
+              for it. We hope you enjoyed it!
+            </p>
+          </div>
+          <div style={{'marginTop': '25px'}}>
+            <Button onClick={()=>{onClose()}}>Close</Button>
+          </div>
+      </div>
+    </div>
+  )
+}
+
+function NavBar({onAboutClick = () => {}}) {
   return (
     <>
     <div style={{'display': 'flex','justifyContent': 'space-between', 'marginBottom': '16px'}}>
@@ -28,11 +49,11 @@ function NavBar() {
     </div>
     <div>
       <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
-        <Button buttonType="transparent">Home</Button>
-        <Button buttonType="transparent">Technology</Button>
-        <Button buttonType="transparent">Stories</Button>
+        <AnchorButton buttonType="transparent" anchor="#home">Home</AnchorButton>
+        <AnchorButton buttonType="transparent" anchor="#technology">Technology</AnchorButton>
+        <AnchorButton buttonType="transparent" anchor="#stories">Stories</AnchorButton>
         <Button buttonType="transparent">Demo</Button>
-        <Button buttonType="transparent">Contact</Button>
+        <Button buttonType="transparent" onClick={()=>{onAboutClick()}}>About</Button>
       </div>
     </div>
     </>
@@ -45,9 +66,13 @@ const Header = ({ text }: { text: string }) =>
 </span>
 
 function App() {
+  const [showAbout, setShowAbout] = useState(false);
   return (
-    <div className={styles.App}>
-    <NavBar/> 
+    <div className={styles.App} id="home">
+      {
+        showAbout && <About onClose={()=>{setShowAbout(!showAbout)}}/>
+      }
+    <NavBar onAboutClick={()=>{setShowAbout(!showAbout)}}/> 
       <span style={{'fontSize': '25px'}}>Hello. <span style={{'color': '#0073b1'}}>Sign in</span><span style={{'fontWeight': '400'}}> for the best experience. New to Asda? </span><span style={{'color': '#0073b1'}}>Register</span></span>
       <div style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#d5e7c7', 'justifyContent': 'space-between'}}>
         <div style={{'margin': '15px', 'textAlign': 'left'}}>
@@ -63,7 +88,7 @@ function App() {
           <PostcodeChecker/>
         </div>
       </div>
-      <div style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#ebebeb', 'justifyContent': 'space-between'}}>        
+      <div id="technology" style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#ebebeb', 'justifyContent': 'space-between'}}>        
         <div style={{'marginLeft': '16px', 'width': '50%', zIndex: '1', 'textAlign': 'left'}}>
           <h1 style={{'color': '#538316', 'paddingTop': '15px'}}>Technology</h1>
           <span style={{'fontSize': '20px'}}>Using our proprietary SonicBarrier technology, we can prevent seagulls from entering a protected area
@@ -72,8 +97,9 @@ function App() {
         </div>
         <PulsaingCircle/>
       </div>
-      <Header text={"Stories"}/>
-      <Grid>
+      <div id="stories">
+        <Header text={"Stories"}/>
+        <Grid>
           {
             stories.map((story: Story) => {
               return (
@@ -87,9 +113,10 @@ function App() {
                   storyURL={story.storyURL}
                 />
               );
-          })
-        }
+            })
+          }
         </Grid>
+      </div>
       <div style={{'textAlign': 'center', 'padding': '16px'}}>
         <Button>See the demo</Button>
         <Button>Buy an ASDA</Button>

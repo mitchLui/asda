@@ -14,3 +14,19 @@ export default function Button({ buttonType, onClick, style, children }: ButtonP
     </button>
   );
 }
+
+type AnchorButtonProps = {
+  style?: React.CSSProperties;
+  buttonType?: string;
+  children: React.ReactNode;
+  anchor: string;
+}
+
+export function AnchorButton({ buttonType, style, children, anchor }: AnchorButtonProps) {
+  buttonType = buttonType || 'primary';
+  return (
+    <a style={style} className={`${buttonStyles.button} ${buttonStyles.anchor} ${buttonStyles[buttonType]}`} href={anchor}>
+      {children}
+    </a>
+  );
+}
