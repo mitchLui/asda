@@ -66,8 +66,8 @@ function App() {
       <div style={{'marginTop': '10px','display': 'flex', 'backgroundColor': '#ebebeb', 'justifyContent': 'space-between'}}>        
         <div style={{'marginLeft': '16px', 'width': '50%', zIndex: '1', 'textAlign': 'left'}}>
           <h1 style={{'color': '#538316', 'paddingTop': '15px'}}>Technology</h1>
-          <span style={{'fontSize': '20px'}}>Using our proprietary ASDA SonicBarrier© technology, we can prevent seagulls from entering a protected area
-          by emitting a high frequency sound that is inaudible to humans, but deters seagulls.</span>
+          <span style={{'fontSize': '20px'}}>Using our proprietary SonicBarrier technology, we can prevent seagulls from entering a protected area
+          by emitting a high frequency sound that is inaudible to humans but deters seagulls.</span>
           <p><Button>See it in action</Button></p>
         </div>
         <PulsaingCircle/>
