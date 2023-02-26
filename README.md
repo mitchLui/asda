@@ -19,3 +19,7 @@ TBA
 ## 1.3. Our Project
 
 TBA
+
+## Python
+
+How to run: `python -m http.server`
