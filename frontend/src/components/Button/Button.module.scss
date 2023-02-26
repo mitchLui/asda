@@ -1,0 +1,49 @@
+.button {
+  border: 4px;
+  padding: 11px 16px;
+  background-color: #538316;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  &:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  }
+}
+
+.primary {
+  background-color: #538316;
+  margin-top: 5px;
+
+  &:hover {
+    background-color: #3d6010;
+  }
+}
+
+.action {
+  background-color: #0073b1;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-weight: 900;
+
+  &:hover {
+    background-color: #005e8f;
+  }
+}
+
+.transparent {
+  background-color: #fff;
+  color: #464646;
+  font-weight: 400;
+  border: 1px solid #ababab;
+  width: 100%;
+
+  &:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.1); 
+  }
+}
