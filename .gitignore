@@ -22,7 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
-#olly
+backend/__pycache__/
+backend/sql_app.db
 
 .idea/*
+.vscode/*
