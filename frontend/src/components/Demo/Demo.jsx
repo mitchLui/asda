@@ -148,13 +148,7 @@ async function test() {
         maskObject(prev_box);
         previousSegmentationComplete = true;
         
-        if (!birdClicked && !endVideo) {
-          window.requestAnimationFrame(predict);
-          if (birdClicked) {
-            window.requestAnimationFrame(predict);
-            endVideo = true;
-          }
-        }
+        window.requestAnimationFrame(predict);
       });
     }
   }
@@ -204,8 +198,7 @@ export function Demo() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [start, setStarted] = useState(false);
   const [mouseClicked, setMouseClicked] = useState(false);
-  const [source, setSource] = useState(`/videos/6.mp4`);
-  console.log(source);
+  const [source, setSource] = useState(`/videos/5.mp4`);
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });
   }
@@ -214,6 +207,12 @@ export function Demo() {
     test();
     setMouseClicked(false);
   }, [start, mouseClicked]);
+
+  useEffect(() => {
+    if (mouseClicked) {
+      setSource(`/videos/${getRandomInt(5)}.mp4`);
+    }
+  }, [mouseClicked]);
 
   return (
     <div className={styles.demo} onMouseMove={(ev) => {handleMouseMove(ev)}}>
