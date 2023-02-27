@@ -1,4 +1,5 @@
 import Button, {AnchorButton} from '../Button/Button';
+import { Link } from 'react-router-dom';
 
 export default function NavBar({onAboutClick = () => {}}) {
   return (
@@ -22,10 +23,10 @@ export default function NavBar({onAboutClick = () => {}}) {
     </div>
     <div>
       <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
-        <AnchorButton buttonType="transparent" anchor="#home">Home</AnchorButton>
+        <Link to="/"><Button buttonType="transparent">Home</Button></Link>
         <AnchorButton buttonType="transparent" anchor="#technology">Technology</AnchorButton>
         <AnchorButton buttonType="transparent" anchor="#stories">Stories</AnchorButton>
-        <Button buttonType="transparent">Demo</Button>
+        <Link to="/demo"><Button buttonType="transparent">Demo</Button></Link>
         <Button buttonType="transparent" onClick={()=>{onAboutClick()}}>About</Button>
       </div>
     </div>
