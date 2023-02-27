@@ -7,6 +7,7 @@ import {
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './pages/HomePage/HomePage';
 import DemoPage from './pages/DemoPage/DemoPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 import styles from './App.module.scss';
 
 function App (): React.ReactElement {
@@ -17,6 +18,7 @@ function App (): React.ReactElement {
           <Routes>
             <Route path={'/'} element={<HomePage/>}/>
             <Route path={'/demo'} element={<DemoPage/>}/>
+            <Route path={'/about'} element={<AboutPage/>}/>
           </Routes>
         </Router>
       </div>

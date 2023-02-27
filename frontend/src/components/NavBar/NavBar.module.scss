@@ -1,0 +1,21 @@
+.link { 
+  border: 4px;
+  padding: 11px 16px;
+  background-color: #fff;
+  color: #464646;
+  font-weight: 600;
+  border: 1px solid #ababab;
+  width: 100%;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-decoration: none;
+
+  &:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.1); 
+  }
+}

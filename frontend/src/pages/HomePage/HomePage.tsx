@@ -3,6 +3,7 @@ import styles from './HomePage.module.scss';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Grid from '../../components/Grid/Grid';
+import Header from '../../components/Header/Header';
 import PostcodeChecker from '../../components/PostcodeChecker/PostcodeChecker';
 import { PulsatingCircle } from '../../components/PulsatingCircle/PulsatingCircle';
 import { stories, Story } from '../../data/stories';
@@ -27,12 +28,7 @@ function About({onClose = () => {}}) {
   )
 }
 
-const Header = ({ text }: { text: string }) => 
-<span style={{'textAlign': 'center'}}>
-  <h1 style={{'color': '#538316'}}>{text}</h1>
-</span>
-
-function App() {
+function HomePage() {
   const [showAbout, setShowAbout] = useState(false);;
 
   return (
@@ -95,4 +91,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;

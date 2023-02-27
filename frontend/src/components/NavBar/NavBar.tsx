@@ -1,7 +1,8 @@
-import Button, {AnchorButton} from '../Button/Button';
+import Button from '../Button/Button';
 import { Link } from 'react-router-dom';
+import styles from './NavBar.module.scss';
 
-export default function NavBar({onAboutClick = () => {}}) {
+export default function NavBar() {
   return (
     <>
     <div style={{'display': 'flex','justifyContent': 'space-between', 'marginBottom': '16px'}}>
@@ -22,12 +23,12 @@ export default function NavBar({onAboutClick = () => {}}) {
       </div>
     </div>
     <div>
-      <div style={{'display': 'flex', 'justifyContent': 'space-between', 'marginBottom': '10px'}}>
-        <Link to="/"><Button buttonType="transparent">Home</Button></Link>
-        <AnchorButton buttonType="transparent" anchor="#technology">Technology</AnchorButton>
-        <AnchorButton buttonType="transparent" anchor="#stories">Stories</AnchorButton>
-        <Link to="/demo"><Button buttonType="transparent">Demo</Button></Link>
-        <Button buttonType="transparent" onClick={()=>{onAboutClick()}}>About</Button>
+      <div style={{'display': 'flex', 'justifyContent': 'center', 'marginBottom': '10px'}}>
+        <Link className={styles.link} to="/">Home</Link>
+        <a className={styles.link} href="/#technology">Technology</a>
+        <a className={styles.link} href="/#stories">Stories</a>
+        <Link className={styles.link} to="/demo">Demo</Link>
+        <Link className={styles.link} to="/about">About</Link>
       </div>
     </div>
     </>
