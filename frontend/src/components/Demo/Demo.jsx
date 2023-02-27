@@ -3,8 +3,9 @@ import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import Button from '../Button/Button';
 import styles from './Demo.module.scss';
 import Leaderboard from '../Leaderboard/Leaderboard';
+import { createScore, createUser, updateScore } from '../../utils/utils';
 
-async function test() {
+async function processGame(score_id, score) {
   var model = undefined;
   var video = document.getElementById('video');
   const liveView = document.getElementById('liveView');
@@ -35,6 +36,7 @@ async function test() {
       if (event.offsetX > x && event.offsetX < x + w && event.offsetY > y && event.offsetY < y + h) {
         birdClicked = true;
         console.log('hit!');
+        updateScore(score_id, score);
       }
     }
   }
@@ -190,51 +192,84 @@ async function test() {
 }
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 export function Demo() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [start, setStarted] = useState(false);
-  const [mouseClicked, setMouseClicked] = useState(false);
+  const [username, setUsername] = useState(null);
+  const [score, setScore] = useState(null);
   const [source, setSource] = useState(`/videos/5.mp4`);
+  
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });
   }
 
   useEffect(() => {
-    test();
-    setMouseClicked(false);
-  }, [start, mouseClicked]);
+    // create an aync function to call the api
+    async function startGame() {
+      if (start && !score) {
+        if (!username) {
+          alert("Please enter your name")
+          setStarted(false);
+        } else {
+          await createUser(username).then((res) => {
+            createScore(res.id).then((res) => {
+              sleep(500);
+              console.log(res);
 
-  useEffect(() => {
-    if (mouseClicked) {
-      setSource(`/videos/${getRandomInt(5)}.mp4`);
+              setScore(res);
+              processGame(res.id, res.score + 1);
+            }
+            ).catch((err) => {
+              console.log(err);
+            }
+            );
+        });
+      }
     }
-  }, [mouseClicked]);
+    }
+    startGame();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [start, username]);
+
+
 
   return (
     <div className={styles.demo} onMouseMove={(ev) => {handleMouseMove(ev)}}>
-      <div style={{width: '75%', height: '100%', float: 'left'}}>
+      <div style={{textAlign: 'center', width: '75%', display: 'inline-block'}}>
+        {
+          score && <div >
+            <p>Name: {username} #{score.owner_id}</p>
+            <p>Score: {score.score}</p>
+          </div>
+        }
       {!start && <div style={{paddingTop: '150px', textAlign: 'center', height: '500px'}}>
-        <p>Want to see how effective ASDA is? See for yourself! Play the ASDA game and see how many seagulls you can shoot!</p>
-        <Button onClick={() => {setStarted(true)}}>Start</Button>
+        <p>Want to see how effective ASDA is? See for yourself! Play the ASDA game and see how many seagulls you can deter!</p>
+        <form>
+          <input 
+            type="text" 
+            placeholder="Enter your name" 
+            onChange={(e) => {setUsername(e.target.value)}}
+            style={{width: '200px', height: '30px', borderRadius: '5px', border: '1px solid #c2c2c2', fontSize: '15px', padding: '5px'}}
+            required
+          />
+          <Button onClick={() => {setStarted(true)}}>Start</Button>
+        </form>
         </div>}
       {
         start && 
         <>
         <img id="crosshair" className={styles.seagullshooter} style={{position: 'absolute', left: mousePosition.x, top: mousePosition.y, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
         <div id="loading">Loading...</div>
-        <div style={{width: '50%', height: 'calc(100vw * 9 / 16)', marginTop: '100px', 'marginLeft': '50px', position: 'relative', alignItems: 'center'}} id="liveView" className="videoView">
-          <video id="video" style={{display: 'none', width: '100%', height: '100%', objectFit: 'contain'}} onClick={()=>{setMouseClicked(true)}}>
+        <div style={{width: '50%', height: 'calc(100vw * 9 / 16)', position: 'relative', marginLeft: '25%'}} id="liveView" className="videoView">
+          <video id="video" style={{display: 'none', width: '100%', height: '100%', objectFit: 'contain'}}>
             <source src={source} type="video/mp4"/>
           </video>
         </div>
         </>
-      }
-      {
-
       }
       </div>
       <div style={{width: '25%', height: '100%', float: 'right'}}>

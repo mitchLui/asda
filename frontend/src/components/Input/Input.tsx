@@ -10,6 +10,6 @@ type InputProps = {
 export default function Input({ name, style, value }: InputProps) {
   const [inputValue, setInputValue] = useState(value);
   return (      
-    <input style={style} className={inputStyles.input} id={name} name={name} onChange={() => {setInputValue(inputValue)}} value={inputValue} />
+    <input style={style} className={inputStyles.input} id={name} name={name} onChange={() => {setInputValue(inputValue)}} placeholder={inputValue} />
   );
 }

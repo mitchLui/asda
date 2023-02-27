@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Leaderboard.module.scss';
-import { Score, getLeaderboard } from './utils';
+import { Score, getLeaderboard } from '../../utils/utils';
 
 export default function Leaderboard() {
   const [scores, setScores] = useState([] as Score[]);
@@ -12,7 +12,6 @@ export default function Leaderboard() {
       setScores(scores);
       };
       fetchScores();
-        
     }, []);
 
   return (
@@ -22,6 +21,7 @@ export default function Leaderboard() {
       {scores.map((row: Score) => (
         <li className={styles.item} key={row.score_id}>
           <span className={styles.item__name}>{row.username}</span>
+          <span className={styles.item__id}> #{row.user_id}</span>
           <span className={styles.item__score}>{row.score}</span>
         </li>
       ))}
