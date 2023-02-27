@@ -1,9 +1,8 @@
 export type Score = {
-  game_mode: number;
   score: number;
   username: string
-  id: string;
-  owner: string;
+  user_id: string;
+  score_id: string;
 }
 
 export async function getLeaderboard() {

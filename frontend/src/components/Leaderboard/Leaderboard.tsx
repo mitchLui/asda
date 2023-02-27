@@ -20,8 +20,8 @@ export default function Leaderboard() {
     <ul className={styles.item_wrapper}>
       <h4 className={styles.item__title}>Leaderboard:</h4>
       {scores.map((row: Score) => (
-        <li className={styles.item} key={row.id}>
-          <span className={styles.item__name}>{row.id}</span>
+        <li className={styles.item} key={row.score_id}>
+          <span className={styles.item__name}>{row.username}</span>
           <span className={styles.item__score}>{row.score}</span>
         </li>
       ))}
