@@ -217,8 +217,9 @@ export function Demo() {
           setStarted(false);
         } else {
           await createUser(username).then((res) => {
+            sleep(1000);
             createScore(res.id).then((res) => {
-              sleep(500);
+              sleep(1000);
               console.log(res);
 
               setScore(res);
