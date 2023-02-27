@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
+import Button from '../Button/Button';
+import styles from './Demo.module.scss';
 
 async function test() {
-  var model = undefined;
+  var model: any = undefined;
   var video = document.getElementById('video');
   const liveView = document.getElementById('liveView');
   var bboxes = [];
+  if (liveView) {
 
   // We will create a tempory canvas to render to store frames from 
   // the web cam stream for classification.
@@ -20,6 +23,7 @@ async function test() {
   var birdClicked = false;
 
   function handleClick(event) {
+    console.log('clicked');
     var bboxesCopy = [...bboxes];
     for (let i = 0; i < bboxesCopy.length; i++) {
       var bbox = bboxesCopy[i];
@@ -162,6 +166,7 @@ async function test() {
     // Video stuff
     liveView.addEventListener('click', handleClick);
 
+
     // Set up canvases
     displayedCanvas.width = video.videoWidth;
     displayedCanvas.height = video.videoHeight;
@@ -171,14 +176,18 @@ async function test() {
     displayedCanvasCtx.drawImage(video, 0, 0);
     
     video.play();
+    console.log('plays');
     predict();
   }).catch(err => {
     console.log(err);
   });
 }
+}
 
 export const Demo = () => {
   const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+  const [start, setStarted] = useState(false);
+  const [mouseClicked, setMouseClicked] = useState(false);
 
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });
@@ -186,17 +195,25 @@ export const Demo = () => {
 
   useEffect(() => {
     test();
-  }, []);
+    setMouseClicked(false);
+  }, [start, mouseClicked]);
 
   return (
-    <div style={{width: '100vw', height: '100vh'}} onMouseMove={(ev) => {handleMouseMove(ev)}}>
-      <img style={{position: 'absolute', left: mousePosition.x - 100, top: mousePosition.y - 100, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
-      <div id="loading">Loading...</div>
-      <div style={{position: 'relative'}} id="liveView" className="videoView">
-        <video id="video" loop style={{'display': 'none'}}>
-          <source src="videos/7.mp4" type="video/mp4"/>
-        </video>
-      </div>
+    <div style={{width: '100%', height: '100%'}} onMouseMove={(ev) => {handleMouseMove(ev)}}>
+      {!start && <Button onClick={() => {setStarted(true)}}>Start</Button>}
+      {
+        start && 
+        <>
+        <img className={styles.seagullshooter} style={{position: 'absolute', left: mousePosition.x, top: mousePosition.y, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
+        <div id="loading">Loading...</div>
+        <div style={{position: 'relative'}} id="liveView" className="videoView">
+          <video id="video" loop style={{'display': 'none'}} onClick={()=>{setMouseClicked(true)}}>
+            <source src="videos/7.mp4" type="video/mp4"/>
+          </video>
+        </div>
+        </>
+      }
+
     </div>
   )
 }
