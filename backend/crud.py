@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 import models
 import schemas
 
+from fastapi.encoders import jsonable_encoder
 
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
@@ -34,7 +35,11 @@ def get_score(db: Session, score_id: int):
 
 
 def get_scores_by_gamemode(db: Session, gamemode: int, skip: int = 0, limit: int = 100):
-    return db.query(models.Score).filter(models.Score.game_mode == gamemode).offset(skip).limit(limit).all()
+    tmp = []
+    for i in (db.query(models.Score, models.User).join(models.User).filter(models.Score.game_mode == gamemode).offset(skip).limit(limit).all()):
+        ree = ({'score':i[0].score, 'username':i[1].username, 'user_id':i[1].id, 'score_id': i[0].id})
+        tmp.append(jsonable_encoder(ree))
+    return tmp
 
 
 def get_user_score(db: Session, user_id: int):

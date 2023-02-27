@@ -74,9 +74,9 @@ def get_scores(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return scores
 
 
-@app.get("/scores/{gamemode}", response_model=list[schemas.Score])
+@app.get("/scores/{gamemode}")#, response_model=list[tuple[schemas.Score, schemas.User]])
 def get_score_by_gamemode(gamemode: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    db_score = crud.get_scores_by_gamemode(db, gamemode=gamemode, skip=skip, limit=limit)
+    db_score: list[tuple[schemas.Score, schemas.User]] = crud.get_scores_by_gamemode(db, gamemode=gamemode, skip=skip, limit=limit)
     if db_score is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_score
