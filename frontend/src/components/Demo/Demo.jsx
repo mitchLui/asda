@@ -162,6 +162,8 @@ async function test() {
     console.log("Loaded");
     var loading = document.getElementById('loading');
     loading.style.display = 'none';
+    var crosshair = document.getElementById('crosshair');
+    crosshair.style.display = 'block';
 
     // Video stuff
     liveView.addEventListener('click', handleClick);
@@ -204,7 +206,7 @@ export const Demo = () => {
       {
         start && 
         <>
-        <img className={styles.seagullshooter} style={{position: 'absolute', left: mousePosition.x, top: mousePosition.y, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
+        <img id="crosshair" className={styles.seagullshooter} style={{position: 'absolute', left: mousePosition.x, top: mousePosition.y, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
         <div id="loading">Loading...</div>
         <div style={{position: 'relative'}} id="liveView" className="videoView">
           <video id="video" loop style={{'display': 'none'}} onClick={()=>{setMouseClicked(true)}}>
