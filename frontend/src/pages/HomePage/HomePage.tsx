@@ -4,9 +4,8 @@ import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Grid from '../../components/Grid/Grid';
 import PostcodeChecker from '../../components/PostcodeChecker/PostcodeChecker';
-import { PulsaingCircle } from '../../components/PulsatingCircle/PulsatingCircle';
+import { PulsatingCircle } from '../../components/PulsatingCircle/PulsatingCircle';
 import { stories, Story } from '../../data/stories';
-import NavBar from '../../components/NavBar/NavBar';
 
 function About({onClose = () => {}}) {
   return (
@@ -37,7 +36,7 @@ function App() {
   const [showAbout, setShowAbout] = useState(false);;
 
   return (
-    <div className={styles.App} id="home">
+    <div className={styles.main} id="home">
       {
         showAbout && <About onClose={()=>{setShowAbout(!showAbout)}}/>
       }
@@ -65,7 +64,7 @@ function App() {
           by emitting a high frequency sound that is inaudible to humans but deters seagulls.</span>
           <p><Button>See it in action</Button></p>
         </div>
-        <PulsaingCircle/>
+        <PulsatingCircle/>
       </div>
       <div id="stories">
         <Header text={"Stories"}/>

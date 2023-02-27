@@ -1,6 +1,6 @@
 import styles from './PulsatingCircle.module.scss';
 
-export function PulsaingCircle() {
+export function PulsatingCircle() {
   return (
 <div className={styles.wrapper}>
   <span className={`${styles.ring} ${styles.ring1}`}></span>
