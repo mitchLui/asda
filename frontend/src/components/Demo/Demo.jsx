@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
 
 async function test() {
@@ -135,10 +135,6 @@ async function test() {
                 + predictions[n].bbox[2] + 'px; height: '
                 + predictions[n].bbox[3] + 'px;';
 
-            // liveView.appendChild(highlighter);
-            // liveView.appendChild(p);
-            // children.push(highlighter);
-            // children.push(p);
           }
         }
 
@@ -161,7 +157,7 @@ async function test() {
     model = loadedModel;
     console.log("Loaded");
     var loading = document.getElementById('loading');
-    loading.style="display: none;";
+    loading.style.display = 'none';
 
     // Video stuff
     liveView.addEventListener('click', handleClick);
@@ -173,13 +169,6 @@ async function test() {
     videoRenderCanvas.height = video.videoHeight;
     let displayedCanvasCtx = displayedCanvas.getContext('2d');
     displayedCanvasCtx.drawImage(video, 0, 0);
-
-    // Start the video
-    document.addEventListener('mousemove', function(e) {
-      let circle = document.getElementById("crosshair");
-      circle.style.left = e.pageX + 'px';
-      circle.style.top = e.pageY + 'px';
-    });
     
     video.play();
     predict();
@@ -189,20 +178,25 @@ async function test() {
 }
 
 export const Demo = () => {
+  const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+
+  function handleMouseMove(e) {
+    setMousePosition({ x: e.clientX, y: e.clientY });
+  }
 
   useEffect(() => {
     test();
   }, []);
 
   return (
-    <>
-    <div id="loading"><p>Loading...</p></div>
-    <div id="liveView" className="videoView">
-      <video id="video" loop style={{'display': 'none'}}>
-        <source src="videos/7.mp4" type="video/mp4"/>
-      </video>
+    <div style={{width: '100vw', height: '100vh'}} onMouseMove={(ev) => {handleMouseMove(ev)}}>
+      <img style={{position: 'absolute', left: mousePosition.x - 100, top: mousePosition.y - 100, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
+      <div id="loading">Loading...</div>
+      <div style={{position: 'relative'}} id="liveView" className="videoView">
+        <video id="video" loop style={{'display': 'none'}}>
+          <source src="videos/7.mp4" type="video/mp4"/>
+        </video>
+      </div>
     </div>
-    <img src="/cross.png" alt="img" id="crosshair"/>
-    </>
   )
 }
