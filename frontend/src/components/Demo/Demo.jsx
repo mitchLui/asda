@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import Button from '../Button/Button';
 import styles from './Demo.module.scss';
+import Leaderboard from '../Leaderboard/Leaderboard';
 
 async function test() {
-  var model: any = undefined;
+  var model = undefined;
   var video = document.getElementById('video');
+  video.style.marginTop = '50px';
+  video.style.marginLeft = '50px';
   const liveView = document.getElementById('liveView');
   var bboxes = [];
   if (liveView) {
@@ -186,11 +189,11 @@ async function test() {
 }
 }
 
-export const Demo = () => {
-  const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+export function Demo() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [start, setStarted] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
   const [mouseClicked, setMouseClicked] = useState(false);
-
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });
   }
@@ -201,21 +204,31 @@ export const Demo = () => {
   }, [start, mouseClicked]);
 
   return (
-    <div style={{width: '100%', height: '100%'}} onMouseMove={(ev) => {handleMouseMove(ev)}}>
-      {!start && <Button onClick={() => {setStarted(true)}}>Start</Button>}
+    <div className={styles.demo} onMouseMove={(ev) => {handleMouseMove(ev)}}>
+      <div style={{width: '75%', height: '100%', float: 'left'}}>
+      {!start && <div style={{paddingTop: '150px', textAlign: 'center', height: '500px'}}>
+        <p>Want to see how effective ASDA is? See for yourself! Play the ASDA game and see how many seagulls you can shoot!</p>
+        <Button onClick={() => {setStarted(true)}}>Start</Button>
+        </div>}
       {
         start && 
         <>
         <img id="crosshair" className={styles.seagullshooter} style={{position: 'absolute', left: mousePosition.x, top: mousePosition.y, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
         <div id="loading">Loading...</div>
-        <div style={{position: 'relative'}} id="liveView" className="videoView">
-          <video id="video" loop style={{'display': 'none'}} onClick={()=>{setMouseClicked(true)}}>
-            <source src="videos/7.mp4" type="video/mp4"/>
+        <div style={{width: '100%', height: 'calc(100vw * 9 / 16)', marginTop: '100px', 'marginLeft': '50px', position: 'relative', alignItems: 'center'}} id="liveView" className="videoView">
+          <video id="video" loop style={{display: 'none', width: '100%', height: '100%', objectFit: 'contain'}} onClick={()=>{setMouseClicked(true)}}>
+            <source src="videos/3.mp4" type="video/mp4"/>
           </video>
         </div>
         </>
       }
+      {
 
+      }
+      </div>
+      <div style={{width: '25%', height: '100%', float: 'right'}}>
+        <Leaderboard />
+      </div>
     </div>
   )
 }
