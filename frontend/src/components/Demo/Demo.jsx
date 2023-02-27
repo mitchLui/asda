@@ -7,8 +7,6 @@ import Leaderboard from '../Leaderboard/Leaderboard';
 async function test() {
   var model = undefined;
   var video = document.getElementById('video');
-  video.style.marginTop = '50px';
-  video.style.marginLeft = '50px';
   const liveView = document.getElementById('liveView');
   var bboxes = [];
   if (liveView) {
@@ -24,9 +22,9 @@ async function test() {
   liveView.appendChild(displayedCanvas);
 
   var birdClicked = false;
+  var endVideo = false;
 
   function handleClick(event) {
-    console.log('clicked');
     var bboxesCopy = [...bboxes];
     for (let i = 0; i < bboxesCopy.length; i++) {
       var bbox = bboxesCopy[i];
@@ -36,9 +34,11 @@ async function test() {
       var h = bbox[3];
       if (event.offsetX > x && event.offsetX < x + w && event.offsetY > y && event.offsetY < y + h) {
         birdClicked = true;
+        console.log('hit!');
       }
     }
   }
+
 
   /********************************************************************
   // Continuously grab image from displayed stream and classify it.
@@ -114,11 +114,6 @@ async function test() {
   function predict() {
     if (previousSegmentationComplete) {
       model.detect(video).then(predictions => {
-        // delete all previous predictions
-        // for (let i = 0; i < children.length; i++) {
-        //   liveView.removeChild(children[i]);
-        // }
-        // children.splice(0);
 
         bboxes = []; // empty bboxes
 
@@ -152,10 +147,20 @@ async function test() {
         }
         maskObject(prev_box);
         previousSegmentationComplete = true;
-
-        window.requestAnimationFrame(predict);
+        
+        if (!birdClicked && !endVideo) {
+          window.requestAnimationFrame(predict);
+          if (birdClicked) {
+            window.requestAnimationFrame(predict);
+            endVideo = true;
+          }
+        }
       });
     }
+  }
+
+  function handleEnd(event) {
+    console.log('ended');
   }
 
   // Load the model;
@@ -170,6 +175,8 @@ async function test() {
 
     // Video stuff
     liveView.addEventListener('click', handleClick);
+
+    video.addEventListener('ended', handleEnd);
 
 
     // Set up canvases
@@ -189,11 +196,16 @@ async function test() {
 }
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 export function Demo() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [start, setStarted] = useState(false);
-  const [gameEnded, setGameEnded] = useState(false);
   const [mouseClicked, setMouseClicked] = useState(false);
+  const [source, setSource] = useState(`/videos/6.mp4`);
+  console.log(source);
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });
   }
@@ -215,9 +227,9 @@ export function Demo() {
         <>
         <img id="crosshair" className={styles.seagullshooter} style={{position: 'absolute', left: mousePosition.x, top: mousePosition.y, width: 200, height: 200, zIndex: 10}} src="/cross.png" alt="img"/>
         <div id="loading">Loading...</div>
-        <div style={{width: '100%', height: 'calc(100vw * 9 / 16)', marginTop: '100px', 'marginLeft': '50px', position: 'relative', alignItems: 'center'}} id="liveView" className="videoView">
-          <video id="video" loop style={{display: 'none', width: '100%', height: '100%', objectFit: 'contain'}} onClick={()=>{setMouseClicked(true)}}>
-            <source src="videos/3.mp4" type="video/mp4"/>
+        <div style={{width: '50%', height: 'calc(100vw * 9 / 16)', marginTop: '100px', 'marginLeft': '50px', position: 'relative', alignItems: 'center'}} id="liveView" className="videoView">
+          <video id="video" style={{display: 'none', width: '100%', height: '100%', objectFit: 'contain'}} onClick={()=>{setMouseClicked(true)}}>
+            <source src={source} type="video/mp4"/>
           </video>
         </div>
         </>
