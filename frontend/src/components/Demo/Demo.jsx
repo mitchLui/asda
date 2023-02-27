@@ -156,7 +156,8 @@ async function processGame(score_id, score) {
   }
 
   function handleEnd(event) {
-    console.log('ended');
+    document.getElementById('videoView').style.display = 'none';
+    document.createElement('p').innerText = 'Game ended! Reaload the page to see yur score';
   }
 
   // Load the model;
@@ -201,7 +202,7 @@ export function Demo() {
   const [start, setStarted] = useState(false);
   const [username, setUsername] = useState(null);
   const [score, setScore] = useState(null);
-  const [source, setSource] = useState(`/videos/5.mp4`);
+  const [startTime, setStartTime] = useState(null);
   
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });
@@ -228,7 +229,7 @@ export function Demo() {
             }
             );
         });
-      }
+      } 
     }
     }
     startGame();
@@ -243,7 +244,6 @@ export function Demo() {
         {
           score && <div >
             <p>Name: {username} #{score.owner_id}</p>
-            <p>Score: {score.score}</p>
           </div>
         }
       {!start && <div style={{paddingTop: '150px', textAlign: 'center', height: '500px'}}>
@@ -266,7 +266,7 @@ export function Demo() {
         <div id="loading">Loading...</div>
         <div style={{width: '50%', height: 'calc(100vw * 9 / 16)', position: 'relative', marginLeft: '25%'}} id="liveView" className="videoView">
           <video id="video" style={{display: 'none', width: '100%', height: '100%', objectFit: 'contain'}}>
-            <source src={source} type="video/mp4"/>
+            <source src="/videos/5.mp4" type="video/mp4"/>
           </video>
         </div>
         </>
