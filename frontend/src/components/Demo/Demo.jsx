@@ -202,7 +202,6 @@ export function Demo() {
   const [start, setStarted] = useState(false);
   const [username, setUsername] = useState(null);
   const [score, setScore] = useState(null);
-  const [startTime, setStartTime] = useState(null);
   
   function handleMouseMove(e) {
     setMousePosition({ x: e.clientX, y: e.clientY });

@@ -13,13 +13,17 @@ export type User = {
 }
 
 export async function getLeaderboard() {
-  const response = await fetch('http://localhost:8000/scores/0');
+  const response = await fetch(`http://localhost:8000/scores/0`, { 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   const data = await response.json().then((data: Score[]) => data);
   return data;
 }
 
 export async function createUser(username: string) {
-  const response = await fetch('http://localhost:8000/users', {
+  const response = await fetch(`http://localhost:8000/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
