@@ -35,5 +35,14 @@ export const stories: Story[] = [
     image: '/story-3.jpg',
     imageAlt: 'Story 3 image',
     storyURL: 'https://www.bbc.com/news/uk-wales-south-west-wales-43727683'
+  },
+  {
+    id: 4,
+    title: 'Protecting our groceries',
+    description: "A seagull stole a packet of mini cheddars from a Tesco.",
+    detail: 'We can deter seagulls from entering human-populated spaces with ASDA\'s.',
+    image: '/story-4.jpeg',
+    imageAlt: 'Story 4 image',
+    storyURL: 'https://www.instagram.com/reel/CqnaKtbsyN2/?igshid=MzRlODBiNWFlZA=='
   }
 ];
