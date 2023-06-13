@@ -15,14 +15,14 @@ export default function NavBar() {
         </div>
         <div style={{'textAlign': 'left'}}>
           <span style={{'fontSize': '30px', 'color': '#538316', fontWeight: '900'}}>ASDA</span>
-          <span style={{'paddingLeft': '10px'}}>Anti-Seagull Defence Apparatus</span><br/>
+          <span className={styles.mobile} style={{'paddingLeft': '10px'}}>Anti-Seagull Defence Apparatus</span><br/>
         </div>
       </div>
       <div style={{'textAlign': 'right'}}>
         <Button buttonType="action">Sign In</Button>
       </div>
     </div>
-    <div>
+    <div className={styles.menumobile}>
       <div style={{'display': 'flex', 'justifyContent': 'center', 'marginBottom': '10px'}}>
         <Link className={styles.link} to="/">Home</Link>
         <a className={styles.link} href="/#technology">Technology</a>

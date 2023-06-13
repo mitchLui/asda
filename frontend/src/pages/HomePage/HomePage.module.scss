@@ -1,3 +1,35 @@
+.technology {
+  display: grid;
+  grid-template-areas: 
+  "text circle";
+  margin-top: 10px;
+  background-color: #ebebeb;
+}
+
+.technologytxt {
+  grid-area: text;
+}
+
+.technologyimg {
+  grid-area: circle;
+  margin-right: 4rem;
+}
+
+.postcode {
+  display: grid;
+  grid-template-areas: 
+  "text checker";
+  margin-top: 10px;
+  background-color: #ebebeb;
+}
+
+.postcodetxt {
+  grid-area: text;
+}
+
+.postcodechecker {
+  grid-area: checker;
+}
 
 @media screen and (max-width: 768px) {
   .App {
@@ -6,6 +38,26 @@
 
   .mobile {
     display: none;
+  }
+
+  .technology {
+    grid-template-areas: 
+    "circle"
+    "text";
+  }
+
+  .technologyimg {
+    z-index: 0;
+    opacity: 0.5;
+    margin-top: 0rem;
+    margin-right: 0rem;
+  }
+
+  .postcode {
+    grid-template-areas: 
+    "text"
+    "checker";
+    padding-bottom: 50px;
   }
 }
 
